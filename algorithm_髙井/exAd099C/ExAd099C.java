@@ -44,6 +44,7 @@ public class ExAd099C {
 
 		//格納した入力値を用いて、実際に何回操作が必要になるかを求めます。
 		DrawOut drawOut = new DrawOut();
-		System.out.println(drawOut.actCount(integrityConfirmation));
+		System.out.println(
+				drawOut.actCount(integrityConfirmation.getInputNumber(), integrityConfirmation.getInputNumber()));
 	}
 }

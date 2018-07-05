@@ -10,9 +10,7 @@ import exAd099C.ExAd099C.Amount;
  */
 public class DrawOut {
 
-	public int actCount(IntegrityConfirmation integrityConfirmation) {
-		double inputNumber = integrityConfirmation.getInputNumber();
-		double amount = integrityConfirmation.getInputNumber();
+	public int actCount(double inputNumber, double amount) {
 		int actCount = 0;
 
 		while (amount != 0) {
