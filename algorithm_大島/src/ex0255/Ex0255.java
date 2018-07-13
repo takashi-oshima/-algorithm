@@ -41,7 +41,7 @@ public class Ex0255 {
 		int day = 0;
 		for (int rowCalendar = 0; rowCalendar < 6; rowCalendar++) {
 			for (int colCalendar = 0; colCalendar < 7; colCalendar++) {
-				//01日が何曜かによって1行目をずらす処理
+				// 01日が何曜かによって1行目をずらす処理
 				if (colCalendar - 1 < monthStartDay - 1 && rowCalendar == 0) {
 					System.out.print("   ");
 				} else if (day < monthEndDate) {

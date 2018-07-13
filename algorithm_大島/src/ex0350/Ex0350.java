@@ -63,14 +63,17 @@ public class Ex0350 {
 		while (true) {
 			// 距離が未確定のノードがあると、その中で、最も距離が近いノードを探します。
 			int nearNode = findNearNode(nodeDistance, fixed);
+
 			if (nearNode < 0 || nodeDistance[nearNode] == Integer.MAX_VALUE) {
 				return;
 			}
 			fixed[nearNode] = true;
 			// 隣接したノードについて距離が未確定の場合、そのノードを経由した距離を求め、最短距離を格納します。
 			for (int j = 0; j < NODE_MAP.length; j++) {
+
 				if (NODE_MAP[nearNode][j] > 0 && fixed[j] == false) {
 					int shortDistance = nodeDistance[nearNode] + NODE_MAP[nearNode][j];
+
 					if (shortDistance < nodeDistance[j]) {
 						nodeDistance[j] = shortDistance;
 						viaNode[j] = nearNode;
@@ -90,18 +93,23 @@ public class Ex0350 {
 	public static int findNearNode(int[] nodeDistance, boolean[] fixed) {
 		int unfixedNode = 0;
 		// 距離が未確定のノードを一つ探し、全て確定していれば処理を抜けます。
-		for (unfixedNode = 0; unfixedNode < fixed.length; unfixedNode++)
+		for (unfixedNode = 0; unfixedNode < fixed.length; unfixedNode++) {
+
 			if (fixed[unfixedNode] == false) {
 				break;
 			}
+		}
+
 		if (unfixedNode == fixed.length) {
 			return -1;
 		}
 		// 距離が最も近いノードを探します。
-		for (int i = unfixedNode + 1; i < fixed.length; i++)
+		for (int i = unfixedNode + 1; i < fixed.length; i++) {
+
 			if (fixed[i] == false && nodeDistance[i] < nodeDistance[unfixedNode]) {
 				unfixedNode = i;
 			}
+		}
 		return unfixedNode;
 	}
 }
