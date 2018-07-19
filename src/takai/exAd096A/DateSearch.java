@@ -33,7 +33,8 @@ public class DateSearch {
 	 * @param input Inputクラス
 	 */
 	public void setInputDate(IntegrityConfirmation input) {
-		while (calendar.before(input.inputDate)) {
+		do {
+
 			//(YYYY/01/01)にセットしたものから月の数値と日の数値が同じ日があれば
 			//出力用配列に格納し、countを1増やします。
 			if (calendar.get(Calendar.MONTH) + 1 == calendar.get(Calendar.DATE)) {
@@ -41,16 +42,24 @@ public class DateSearch {
 				count++;
 			}
 
-			//日を増やしていくので、整合性の確認を行います。
-			input.inputDate.setLenient(false);
-			try {
-				calendar.add(Calendar.DATE, 1);
-			} catch (Exception e) {
-				//整合性が取れなくなったら、次の月に進み、日を1日に戻します。
-				calendar.add(Calendar.MONTH, 1);
-				calendar.set(Calendar.DATE, Days.First.getDay());
+			while (!(calendar.compareTo(input.inputDate) > 0)) {
+				//日を増やしていくので、整合性の確認を行います。
+				input.inputDate.setLenient(false);
+
+				try {
+					calendar.add(Calendar.DATE, 1);
+				} catch (Exception e) {
+					//整合性が取れなくなったら、次の月に進み、日を1日に戻します。
+					calendar.add(Calendar.MONTH, 1);
+					calendar.set(Calendar.DATE, Days.First.getDay());
+				}
+
+				if (calendar.get(Calendar.MONTH) + 1 == calendar.get(Calendar.DATE)) {
+					outputTxt.add(getCalendarString(calendar));
+					count++;
+				}
 			}
-		}
+		} while (!(calendar.compareTo(input.inputDate) > 0));
 	}
 
 	/**
@@ -59,14 +68,16 @@ public class DateSearch {
 	 * @return 出力文字列
 	 */
 	public String getDate() {
+
 		//1日しかなかった時の出力文です。
 		if (count == 1) {
-			return getCalendarString(calendar) + "のみが「高橋」です。";
+			return outputTxt.get(0) + "のみが「高橋」です。";
 		}
 
 		//数日あった時の出力文です。
 		for (int i = 0; i < outputTxt.size(); i++) {
 			System.out.print(outputTxt.get(i));
+
 			if (i == outputTxt.size() - 1) {
 				System.out.print("。");
 			} else {

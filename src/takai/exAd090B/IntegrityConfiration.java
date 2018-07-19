@@ -10,36 +10,53 @@ import takai.exAdInput.Input;
  *
  */
 public class IntegrityConfiration {
-
-	String fromNumber = "";
-	String toNumber = "";
+	/** 一つ目の入力値 */
+	private int fromNumber = 0;
+	/** 二つ目の入力値 */
+	private int toNumber = 0;
+	/** 入力値が適切かどうか */
+	private boolean isRightness = false;
 
 	/**
 	 * @return fromNumber
 	 */
-	public String getFromNumber() {
+	public int getFromNumber() {
 		return fromNumber;
 	}
 
 	/**
 	 * @return toNumber
 	 */
-	public String getToNumber() {
+	public int getToNumber() {
 		return toNumber;
+	}
+
+	/**
+	 * @return isRightness
+	 */
+	public boolean isRightness() {
+		return isRightness;
 	}
 
 	/**
 	 * @param fromNumber セットする fromNumber
 	 */
-	public void setFromNumber(String fromNumber) {
+	public void setFromNumber(int fromNumber) {
 		this.fromNumber = fromNumber;
 	}
 
 	/**
 	 * @param toNumber セットする toNumber
 	 */
-	public void setToNumber(String toNumber) {
+	public void setToNumber(int toNumber) {
 		this.toNumber = toNumber;
+	}
+
+	/**
+	 * @param isRightness セットする isRightness
+	 */
+	public void setRightness(boolean isRightness) {
+		this.isRightness = isRightness;
 	}
 
 	/**
@@ -51,14 +68,15 @@ public class IntegrityConfiration {
 
 		if (inputTxt.length != 2 || !inputTxt[0].matches("[1-9]{1}[0-9]{4}")
 				|| !inputTxt[1].matches("[1-9]{1}[0-9]{4}")) {
-			System.out.println("入力文字列が不正です。");
+			System.out.println("入力値が不正です。入力値2が入力値1以上となるようにしてください");
 			return;
 		}
 
-		if (!(inputTxt[0].compareTo(inputTxt[1]) < 0)) {
+		if (inputTxt[0].compareTo(inputTxt[1]) > 0) {
 			System.out.println("入力値が不正です。入力値2が入力値1以上となるようにしてください");
 		}
-		setFromNumber(inputTxt[0]);
-		setToNumber(inputTxt[1]);
+		setFromNumber(Integer.parseInt(inputTxt[0]));
+		setToNumber(Integer.parseInt(inputTxt[1]));
+		setRightness(true);
 	}
 }

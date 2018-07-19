@@ -8,12 +8,14 @@ package takai.exAd086B;
 public class ExAd086B {
 
 	public static void main(String[] args) {
-		//入力値を受け取り適切かどうか判定し、適切で張れば変数に格納します。
+		//入力値を受け取り適切かどうか判定し、適切であれば変数に格納します。
 		IntegrityConfiration integrityConfiration = new IntegrityConfiration();
 		integrityConfiration.scanString();
 
-		//ある金額を支払うことができるかを判定し、結果を出力します。
-		SquareNumberDecision squareNumberDecision = new SquareNumberDecision();
-		squareNumberDecision.isSquareNumber(integrityConfiration.getAnswer());
+		//入力値を繋げた値が平方数かを判定します。
+		if(integrityConfiration.isCanScan()) {
+			SquareNumberDecision squareNumberDecision = new SquareNumberDecision();
+			squareNumberDecision.isSquareNumber(integrityConfiration.getAnswer());
+		}
 	}
 }

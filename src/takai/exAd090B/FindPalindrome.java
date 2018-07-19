@@ -27,20 +27,25 @@ public class FindPalindrome {
 	 * @param fromNumber 入力値1_開始の数値
 	 * @param toNumber 入力値2_終了の位置
 	 */
-	public void palindromeCheck(String fromNumber, String toNumber) {
+	public void palindromeCheck(int fromNumber, int toNumber) {
 		int palindromeCount = 0;
-		while (!fromNumber.equals(toNumber)) {
-			if (fromNumber.charAt(IntIndex.One.getIntIndex()) != fromNumber.charAt(IntIndex.Five.getIntIndex())) {
-				fromNumber = String.valueOf(Integer.parseInt(fromNumber) + 1);
+
+		while (!(toNumber < fromNumber)) {
+			String fromNumberString = Integer.toString(fromNumber);
+
+			if (fromNumberString.charAt(IntIndex.One.getIntIndex()) != fromNumberString
+					.charAt(IntIndex.Five.getIntIndex())) {
+				fromNumber = Integer.parseInt(fromNumberString) + 1;
 				continue;
 			}
 
-			if (fromNumber.charAt(IntIndex.Two.getIntIndex()) != fromNumber.charAt(IntIndex.Fore.getIntIndex())) {
-				fromNumber = String.valueOf(Integer.parseInt(fromNumber) + 1);
+			if (fromNumberString.charAt(IntIndex.Two.getIntIndex()) != fromNumberString
+					.charAt(IntIndex.Fore.getIntIndex())) {
+				fromNumber = Integer.parseInt(fromNumberString) + 1;
 				continue;
 			}
 			palindromeCount++;
-			fromNumber = String.valueOf(Integer.parseInt(fromNumber) + 1);
+			fromNumber = Integer.parseInt(fromNumberString) + 1;
 		}
 		System.out.println(palindromeCount + "個です。");
 	}

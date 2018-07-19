@@ -2,90 +2,59 @@ package takai.exAd085C;
 
 import takai.exAd085C.Enum.BillRate;
 
-//count == tenThousandBillCount + fiveThousandBillCount + thousandBillCount
-//amount == 10000*x + 5000*y + 1000*z
-//count == x+y+z
+/**
+ * 入力された枚数と値があり得るのかを計算します
+ *
+ * @author 高井勇輝
+ *
+ */
 public class CheckIsLie {
+	/**
+	 * 入力された枚数と値があり得るのかを計算します
+	 *
+	 * @param count 枚数
+	 * @param amount 金額
+	 */
 	public void checkAmount(int count, int amount) {
-		int nowCount = 0;
-//		int remainingCount = count;
-		int remainingAmount = amount;
+		/** 現在の金額 */
+		int nowAmount = 0;
+		/** 1万円札の数 */
 		int tenThousandBillCount = 0;
+		/** 5千円札の数 */
 		int fiveThousandBillCount = 0;
+		/** 千円札の数 */
 		int thousandBillCount = 0;
+		/** あり得るかどうか */
 		boolean isTrue = false;
 
-		thousandBillCount = remainingAmount / BillRate.Thousand.getBillRate();
-		nowCount += thousandBillCount;
+		//amount == 10000 * tenThousandBillCount + 5000 * fiveThousandBillCount + 1000 * thousandBillCount
+		//count == tenThousandBillCount + fiveThousandBillCount + thousandBillCount
+		//上記の連立方程式を、tenThousandBillCount = 0を初期値として計算し、金額と枚数が入力値と一致するか、
+		//fiveThousandBillCountが負数になるまで繰り返します。
+		while (fiveThousandBillCount >= 0) {
+			fiveThousandBillCount = ((amount / 1000) - count - (tenThousandBillCount * 9)) / 4;
+			thousandBillCount = count - tenThousandBillCount - fiveThousandBillCount;
 
-		if(0 != remainingAmount % BillRate.Thousand.getBillRate()) {
-			remainingAmount = remainingAmount % BillRate.Thousand.getBillRate();
-		}
-
-//		fiveThousandBillCount = remainingAmount / BillRate.FiveThousand.getBillRate();
-//		nowCount += fiveThousandBillCount;
-//
-//		if(0 != remainingAmount % BillRate.FiveThousand.getBillRate()) {
-//			remainingAmount = remainingAmount % BillRate.FiveThousand.getBillRate();
-//		}
-//
-//		tenThousandBillCount = remainingAmount / BillRate.TenThousand.getBillRate();
-//		nowCount += tenThousandBillCount;
-//
-//		if(0 != remainingAmount % BillRate.TenThousand.getBillRate()) {
-//			remainingAmount = remainingAmount % BillRate.TenThousand.getBillRate();
-//		}
-
-		if(nowCount == count) {
-			isTrue = true;
-		}
-
-		while(nowCount != count) {
-			if(fiveThousandBillCount > thousandBillCount) {
-				fiveThousandBillCount--;
-				thousandBillCount += 5;
+			if (thousandBillCount < 0 || fiveThousandBillCount < 0) {
+				tenThousandBillCount++;
+				continue;
 			}
 
-			if(tenThousandBillCount > fiveThousandBillCount) {
-				tenThousandBillCount--;
-				fiveThousandBillCount +=2;
+			//枚数と金額を確認します。
+			nowAmount = (tenThousandBillCount * BillRate.TenThousand.getBillRate())
+					+ (fiveThousandBillCount * BillRate.FiveThousand.getBillRate())
+					+ (thousandBillCount * BillRate.Thousand.getBillRate());
+
+			if (nowAmount == amount) {
+				isTrue = true;
+				break;
 			}
-			nowCount = tenThousandBillCount + fiveThousandBillCount + thousandBillCount;
+			tenThousandBillCount++;
 		}
 
-//		while(remainingCount > 0) {
-//			tenThousandBillCount = remainingAmount / BillRate.TenThousand.getBillRate();
-//			remainingCount -= tenThousandBillCount;
-//
-//			if(0 == remainingAmount % BillRate.TenThousand.getBillRate()) {
-//				isTrue = true;
-//				break;
-//			}else {
-//				remainingAmount = remainingAmount % BillRate.TenThousand.getBillRate();
-//			}
-//
-//			fiveThousandBillCount = remainingAmount / BillRate.FiveThousand.getBillRate();
-//			remainingCount -= fiveThousandBillCount;
-//			if(0 == remainingAmount % BillRate.FiveThousand.getBillRate()) {
-//				isTrue = true;
-//				break;
-//			}else {
-//				remainingAmount = remainingAmount % BillRate.FiveThousand.getBillRate();
-//			}
-//
-//			thousandBillCount = remainingAmount / BillRate.Thousand.getBillRate();
-//			remainingCount -= thousandBillCount;
-//			if(0 == remainingAmount % BillRate.Thousand.getBillRate()) {
-//				isTrue = true;
-//				break;
-//			}else {
-//				remainingAmount = remainingAmount % BillRate.Thousand.getBillRate();
-//			}
-//		}
-
-		if(isTrue && nowCount == count) {
-			System.out.println(tenThousandBillCount+" "+fiveThousandBillCount+" "+thousandBillCount );
-		}else {
+		if (isTrue) {
+			System.out.println(tenThousandBillCount + " " + fiveThousandBillCount + " " + thousandBillCount);
+		} else {
 			System.out.println("-1 -1 -1");
 		}
 	}

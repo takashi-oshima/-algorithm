@@ -11,8 +11,12 @@ import takai.exAdInput.Input;
  *
  */
 public class IntegrityConfiration {
+	/** お札の全体数 */
 	int count;
+	/** 全体の金額 */
 	int amount;
+	/** 入力値が適切かどうか */
+	private boolean canScan = false;
 
 	/**
 	 * @return count
@@ -29,6 +33,13 @@ public class IntegrityConfiration {
 	}
 
 	/**
+	 * @return canScan
+	 */
+	public boolean isCanScan() {
+		return canScan;
+	}
+
+	/**
 	 * @param count セットする count
 	 */
 	public void setCount(int count) {
@@ -40,6 +51,13 @@ public class IntegrityConfiration {
 	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	/**
+	 * @param canScan セットする canScan
+	 */
+	public void setCanScan(boolean canScan) {
+		this.canScan = canScan;
 	}
 
 	/**
@@ -61,8 +79,15 @@ public class IntegrityConfiration {
 		}
 		setCount(Integer.parseInt(inputTxt[0]));
 		setAmount(Integer.parseInt(inputTxt[1]));
+		setCanScan(true);
 	}
 
+	/**
+	 * 入力された枚数が正しいものか判定します。
+	 *
+	 * @param count 枚数
+	 * @return 判定
+	 */
 	private boolean isIntCount(String count) {
 		boolean isInt = false;
 		int i;
@@ -79,6 +104,12 @@ public class IntegrityConfiration {
 		return isInt;
 	}
 
+	/**
+	 * 入力された金額が正しいものか判定します
+	 *
+	 * @param amount 金額
+	 * @return 判定
+	 */
 	private boolean isIntAmount(String amount) {
 		boolean isInt = false;
 		int i;

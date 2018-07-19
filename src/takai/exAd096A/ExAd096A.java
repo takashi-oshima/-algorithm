@@ -18,8 +18,11 @@ public class ExAd096A {
 
 		//入力値を新しいカレンダーに設定し、入力値並びに日付の整合性を確認します。
 		dateSearch.setInputDate(input);
-		//出力用の文字列を取得します。
-		String Txt = dateSearch.getDate();
-		System.out.println(Txt);
+
+		if (input.isScan()) {
+			//出力用の文字列を取得します。
+			String txt = dateSearch.getDate();
+			System.out.println(txt);
+		}
 	}
 }

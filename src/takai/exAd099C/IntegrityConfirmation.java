@@ -1,6 +1,5 @@
 package takai.exAd099C;
 
-import takai.exAd099C.ExAd099C.IntLength;
 import takai.exAdInput.Input;
 
 /**
@@ -11,19 +10,33 @@ import takai.exAdInput.Input;
  */
 public class IntegrityConfirmation {
 
-	double inputNumber = 0;
+	int inputNumber = 0;
+
+	public enum IntLength {
+		Min(1), Max(100000);
+
+		final int length;
+
+		public int getLength() {
+			return length;
+		}
+
+		private IntLength(int length) {
+			this.length = length;
+		}
+	}
 
 	/**
 	 * @return inputNumber
 	 */
-	public double getInputNumber() {
+	public int getInputNumber() {
 		return inputNumber;
 	}
 
 	/**
 	 * @param inputNumber セットする inputNumber
 	 */
-	public void setInputNumber(double inputNumber) {
+	public void setInputNumber(int inputNumber) {
 		this.inputNumber = inputNumber;
 	}
 
@@ -48,7 +61,7 @@ public class IntegrityConfirmation {
 			System.out.println("1以上、100000以下の整数を入力してください。");
 			return;
 		}
-		setInputNumber(Double.parseDouble(inputTxt[0]));
+		setInputNumber(Integer.parseInt(inputTxt[0]));
 	}
 
 	/**

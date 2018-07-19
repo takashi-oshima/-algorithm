@@ -15,8 +15,24 @@ public class IntegrityConfirmation {
 	int inputMonth = 0;
 	/** 二つ目の入力値 */
 	int inputDay = 0;
-	/** */
+	/** 文字列の入力判定 */
+	private boolean isScan = false;
+	/** 入力値の日付 */
 	Calendar inputDate = Calendar.getInstance();
+
+	/**
+	 * @return isScan
+	 */
+	public boolean isScan() {
+		return isScan;
+	}
+
+	/**
+	 * @param isScan セットする isScan
+	 */
+	public void setScan(boolean isScan) {
+		this.isScan = isScan;
+	}
 
 	public enum Days {
 		StartDay(0), First(1), EndDay(32);
@@ -66,27 +82,37 @@ public class IntegrityConfirmation {
 			System.out.println("半角空白区切りで1～12の整数と、1～31の整数を入力してください。");
 			return;
 		}
-
 		//Calendarクラスの月は0が1月のため、数値を合わせるために入力された値から1引きます。
 		inputMonth = Integer.parseInt(inputTxt[0]);
 		inputMonth -= 1;
 		inputDay = Integer.parseInt(inputTxt[1]);
 
 		//日付の整合性を確認し、(YYYY/入力値1/入力値2)に日付をセットします。
-		inputDate.get(Calendar.YEAR);
-		dateCheck(inputDate);
+		inputDate.setLenient(false);
+
+		try {
+			inputDate.get(Calendar.YEAR);
+			inputDate.set(Calendar.MONTH, inputMonth);
+			inputDate.set(Calendar.DATE, inputDay);
+		} catch (Exception e) {
+			System.out.println("存在しない日数です。");
+			return;
+		}
+		setScan(true);
+		return;
 	}
 
 	/**
 	 * 入力月が数値に変換できるか試します。
 	 * 変換できたときは1～12の数値が入力されているか確認します。
 	 *
-	 * @param inputTxt	入力文字列
+	 * @param inputTxt 入力文字列
 	 * @return isInt 判定結果
 	 */
 	private boolean isIntMonth(String inputTxt) {
 		boolean isInt = false;
 		int i = 0;
+
 		try {
 			i = Integer.parseInt(inputTxt);
 		} catch (NumberFormatException e) {
@@ -102,12 +128,13 @@ public class IntegrityConfirmation {
 	 * 入力日が数値に変換できるか試します。
 	 * 変換できたときは1～31の数値が入力されているか確認します。
 	 *
-	 * @param inputTxt	入力文字列
+	 * @param inputTxt 入力文字列
 	 * @return isInt 判定結果
 	 */
 	private boolean isIntDays(String inputTxt) {
 		boolean isInt = false;
 		int i = 0;
+
 		try {
 			i = Integer.parseInt(inputTxt);
 		} catch (NumberFormatException e) {
@@ -118,21 +145,5 @@ public class IntegrityConfirmation {
 			isInt = true;
 		}
 		return isInt;
-	}
-
-	/**
-	 * 入力された値が適切な日付かを判定し、inputDateとして格納します。
-	 *
-	 * @param inputDate 指定した日付
-	 */
-	private void dateCheck(Calendar inputDate) {
-		inputDate.setLenient(false);
-		try {
-			inputDate.set(Calendar.MONTH, inputMonth);
-			inputDate.set(Calendar.DATE, inputDay);
-		} catch (Exception e) {
-			System.out.println("入力された日付は存在しません。");
-			return;
-		}
 	}
 }

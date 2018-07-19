@@ -9,27 +9,15 @@ package takai.exAd097A;
  */
 public class ExAd097A {
 
-	public enum Number {
-		Start(0), End(100);
-
-		final int num;
-
-		public int getNum() {
-			return num;
-		}
-
-		private Number(int num) {
-			this.num = num;
-		}
-	}
-
 	public static void main(String[] args) {
-
 		IntegrityConfirmation integrityConfirmation = new IntegrityConfirmation();
 		integrityConfirmation.scanString();
 
 		CallCanResearch callCanResearch = new CallCanResearch();
 
+		if(!integrityConfirmation.isCanSpeak()) {
+			return;
+		}
 		//AとCが間接的にでも通話が可能かを判定し、結果に応じた文字列を出力します。
 		System.out.println(callCanResearch.canSpeak(integrityConfirmation));
 	}

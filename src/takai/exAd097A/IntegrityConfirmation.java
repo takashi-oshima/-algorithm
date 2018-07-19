@@ -1,6 +1,5 @@
 package takai.exAd097A;
 
-import takai.exAd097A.ExAd097A.Number;
 import takai.exAdInput.Input;
 
 /**
@@ -10,14 +9,31 @@ import takai.exAdInput.Input;
  *
  */
 public class IntegrityConfirmation {
+
+	public enum Number {
+		Start(1), End(100);
+
+		final int num;
+
+		public int getNum() {
+			return num;
+		}
+
+		private Number(int num) {
+			this.num = num;
+		}
+	}
+
 	/** 1つ目の入力値 */
-	int pointA = 0;
+	private int pointA = 0;
 	/** 2つ目の入力値 */
-	int pointB = 0;
+	private int pointB = 0;
 	/** 3つ目の入力値 */
-	int pointC = 0;
+	private int pointC = 0;
 	/** 4つ目の入力値 */
-	int speakArea = 0;
+	private int speakArea = 0;
+	/** 会話できるかどうか */
+	private boolean canSpeak = false;
 
 	/**
 	 * @return pointA
@@ -45,6 +61,13 @@ public class IntegrityConfirmation {
 	 */
 	public int getSpeakArea() {
 		return speakArea;
+	}
+
+	/**
+	 * @return canSpeak
+	 */
+	public boolean isCanSpeak() {
+		return canSpeak;
 	}
 
 	/**
@@ -76,11 +99,17 @@ public class IntegrityConfirmation {
 	}
 
 	/**
+	 * @param canSpeak セットする canSpeak
+	 */
+	public void setCanSpeak(boolean canSpeak) {
+		this.canSpeak = canSpeak;
+	}
+
+	/**
 	 * 入力値を受け取り、判定したのちに値を各変数に格納します。
 	 */
 	public void scanString() {
 		//キーボードから入力値を取得できるようにします。
-
 		Input input = new Input();
 		String[] inputTxt = input.scan();
 
@@ -98,11 +127,11 @@ public class IntegrityConfirmation {
 			System.out.println("1以上、100以下の整数を4つ入力してください。");
 			return;
 		}
-
 		setPointA(Integer.parseInt(inputTxt[0]));
 		setPointB(Integer.parseInt(inputTxt[1]));
 		setPointC(Integer.parseInt(inputTxt[2]));
 		setSpeakArea(Integer.parseInt(inputTxt[3]));
+		setCanSpeak(true);
 	}
 
 	/**
@@ -115,11 +144,13 @@ public class IntegrityConfirmation {
 	private boolean isIntNumber(String inputTxt) {
 		boolean isInt = false;
 		int i = 0;
+
 		try {
 			i = Integer.parseInt(inputTxt);
 		} catch (NumberFormatException e) {
 			return isInt;
 		}
+
 		if (Number.Start.getNum() <= i && Number.End.getNum() >= i) {
 			isInt = true;
 		}
