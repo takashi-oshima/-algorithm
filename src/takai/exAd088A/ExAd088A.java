@@ -10,9 +10,13 @@ package takai.exAd088A;
 public class ExAd088A {
 
 	public static void main(String[] args) {
-		//入力値を受け取り適切かどうか判定し、適切で張れば変数に格納します。
+		//入力値を受け取り適切かどうか判定し、適切であれば変数に格納します。
 		IntegrityConfiration integrityConfiration = new IntegrityConfiration();
 		integrityConfiration.scanString();
+
+		if(!integrityConfiration.isRightness()) {
+			return;
+		}
 
 		//ある金額を支払うことができるかを判定し、結果を出力します。
 		ConfirmExistsMoney confirmExistsMoney = new ConfirmExistsMoney();

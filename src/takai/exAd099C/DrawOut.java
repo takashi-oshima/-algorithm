@@ -1,6 +1,7 @@
 package takai.exAd099C;
 
-import takai.exAd099C.ExAd099C.Amount;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 格納された変数から、何回操作が必要になるか求めるクラスです。
@@ -9,89 +10,64 @@ import takai.exAd099C.ExAd099C.Amount;
  *
  */
 public class DrawOut {
+
+	public enum Amount {
+		One(1), MinPow(2), Six(6), Nine(9);
+
+		final int amount;
+
+		public int getAmount() {
+			return amount;
+		}
+
+		private Amount(int amount) {
+			this.amount = amount;
+		}
+	}
+
 	/**
-	 * 指定された金額を引き出すために何回操作が必要か計算します
+	 * 指定された金額を引き出すために何回操作が必要か計算します。
 	 *
 	 * @param inputNumber 指定金額
-	 * @return 操作回数
+	 * @return 最少の操作回数
 	 */
-	public int actCount(double inputNumber) {
-		int actCount = 0;
-		double difference = 0;
-		//10000以下で、指数が同じ場合に公倍数が存在しない6と9の累乗を格納している配列
-		double[] sixSquared = { 36, 216, 1296, 7776, 46656 };
-		double[] nineSquared = { 81, 729, 6561, 59049 };
+	public int actCount(int inputNumber) {
+		int nineSquared = 0;
+		List<Integer> counts = new ArrayList<>();
 
-		out: while (inputNumber != 0) {
+		while (inputNumber >= 0) {
+			int count = 0;
+			int sixSquared = inputNumber / Amount.Six.getAmount();
 
-			//残りの出金額が6の累乗の倍数である時、6の累乗を引きます。
-			//6の累乗のj倍数が9の累乗のj+1倍数の値を超えないように、jは5以下であるようにします。
-			for (int i = 0; i < sixSquared.length; i++) {
-				for (int j = 1; j < Amount.Six.getAmount(); j++) {
-
-					//12は-6を2回で処理することが望ましいため、12も条件として指定します。
-					if (inputNumber == sixSquared[i] * j || inputNumber == 12) {
-						inputNumber -= differenceSixSquared(inputNumber);
-						actCount++;
-						continue out;
-					}
-				}
-			}
-
-			//残りの出金額が9の累乗の倍数である時、9の累乗を引きます。
-			//9の累乗のj倍数が6の累乗のj+1倍数の値を超えないように、jは5以下であるようにします。
-			for (int i = 0; i < nineSquared.length; i++) {
-				for (int j = 1; j < Amount.Six.getAmount(); j++) {
-
-					if (inputNumber == nineSquared[i] * j) {
-						inputNumber -= differenceNineSquared(inputNumber);
-						actCount++;
-						continue out;
-					}
-				}
-			}
-
-			difference = Math.max(differenceNineSquared(inputNumber), differenceSixSquared(inputNumber));
-			inputNumber -= difference;
-			actCount++;
-
-			if (inputNumber > Amount.Six.getAmount()) {
-				continue;
-			}
-
-			while (inputNumber != 0) {
-				inputNumber--;
-				actCount++;
-			}
+			count = inputNumber % Amount.Six.getAmount();
+			count += exponentCheck(sixSquared, Amount.Six.getAmount());
+			count += exponentCheck(nineSquared, Amount.Nine.getAmount());
+			counts.add(count);
+			nineSquared++;
+			inputNumber -= Amount.Nine.getAmount();
 		}
-		return actCount;
+		int min = counts.get(0);
+
+		for (int i : counts) {
+			min = Math.min(min, i);
+		}
+		return min;
 	}
 
 	/**
-	 * 残りの出金額に最も近い6の累乗数を返します。
+	 * 残金から6、または9を引いた回数を累乗に変換し、それと余りの和を返します。
 	 *
-	 * @param inputNumber 残り出金額
-	 * @return 6の累乗数
+	 * @param number 残金から6、または9を引いた回数
+	 * @param squaredNumber 6、または9
+	 * @return 余りと渡されたものの個数の和
 	 */
-	private double differenceSixSquared(double inputNumber) {
-		double sixDifference = 0;
-		for (int i = 1; inputNumber >= Math.pow(Amount.Six.getAmount(), i); i++) {
-			sixDifference = Math.pow(Amount.Six.getAmount(), i);
-		}
-		return sixDifference;
-	}
+	private int exponentCheck(int number, int squaredNumber) {
+		int remainder = 0;
 
-	/**
-	 * 残りの出金額に最も近い9の乗数を返します。
-	 *
-	 * @param inputNumber 残り出金額
-	 * @return 9の累乗数
-	 */
-	private double differenceNineSquared(double inputNumber) {
-		double nineDifference = 0;
-		for (int i = 1; inputNumber >= Math.pow(Amount.Nine.getAmount(), i); i++) {
-			nineDifference = Math.pow(Amount.Nine.getAmount(), i);
+		while(number >= squaredNumber) {
+			remainder += number % squaredNumber;
+			number /= squaredNumber;
 		}
-		return nineDifference;
+		return remainder + number;
 	}
 }

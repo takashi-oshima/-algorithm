@@ -13,12 +13,11 @@ public class ConfirmExistsMoney {
 
 		int remainingMoney = payment % FIVE_HUNDRED_YEN;
 
-		if (0 == remainingMoney) {
+		if (remainingMoney == 0) {
 			canPayment = true;
-			return;
 		}
 
-		if (0 >= remainingMoney - coinCount) {
+		if (remainingMoney - coinCount <= 0) {
 			canPayment = true;
 		}
 

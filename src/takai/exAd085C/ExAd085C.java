@@ -1,5 +1,11 @@
 package takai.exAd085C;
 
+/**
+ * 入力された枚数と金額が、日本円であり得るものかどうかを判定するクラスです。
+ *
+ * @author 高井勇輝
+ *
+ */
 public class ExAd085C {
 
 	public static void main(String[] args) {
@@ -7,6 +13,9 @@ public class ExAd085C {
 		IntegrityConfiration integrityConfiration = new IntegrityConfiration();
 		integrityConfiration.scanString();
 
+		if(!integrityConfiration.isCanScan()) {
+			return;
+		}
 		//ある金額を支払うことができるかを判定し、結果を出力します。
 		CheckIsLie checkIsLie = new CheckIsLie();
 		checkIsLie.checkAmount(integrityConfiration.getCount(), integrityConfiration.getAmount());

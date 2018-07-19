@@ -10,37 +10,11 @@ import takai.exAdInput.Input;
  */
 public class IntegrityConfiration {
 	/** 支払う金額 */
-	int payment;
+	private int payment;
 	/** 1円硬貨の枚数 */
-	int coinCount;
-
-	/**
-	 * @return payment
-	 */
-	public int getPayment() {
-		return payment;
-	}
-
-	/**
-	 * @return coinCount
-	 */
-	public int getCoinCount() {
-		return coinCount;
-	}
-
-	/**
-	 * @param payment セットする payment
-	 */
-	public void setPayment(int payment) {
-		this.payment = payment;
-	}
-
-	/**
-	 * @param coinCount セットする coinCount
-	 */
-	public void setCoinCount(int coinCount) {
-		this.coinCount = coinCount;
-	}
+	private int coinCount;
+	/** 入力値が適切かどうか */
+	private boolean isRightness = false;
 
 	public enum AmountLength {
 		Min(1), Max(10000);
@@ -71,6 +45,48 @@ public class IntegrityConfiration {
 	}
 
 	/**
+	 * @return payment
+	 */
+	public int getPayment() {
+		return payment;
+	}
+
+	/**
+	 * @return coinCount
+	 */
+	public int getCoinCount() {
+		return coinCount;
+	}
+
+	/**
+	 * @return isRightness
+	 */
+	public boolean isRightness() {
+		return isRightness;
+	}
+
+	/**
+	 * @param payment セットする payment
+	 */
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+
+	/**
+	 * @param coinCount セットする coinCount
+	 */
+	public void setCoinCount(int coinCount) {
+		this.coinCount = coinCount;
+	}
+
+	/**
+	 * @param isRightness セットする isRightness
+	 */
+	public void setRightness(boolean isRightness) {
+		this.isRightness = isRightness;
+	}
+
+	/**
 	 * 入力値を受け取り、判定を行います。
 	 */
 	public void scanString() {
@@ -80,15 +96,18 @@ public class IntegrityConfiration {
 
 		if (inputTxt.length != TEXT_LENGTH) {
 			System.out.println("入力文字列が不正です。");
+			System.out.println("1～10000で支払う金額を、0～1000で1円硬貨の枚数を入力してください。");
 			return;
 		}
 
 		if (!isIntPayment(inputTxt[0]) || !isInt1yenCount(inputTxt[1])) {
 			System.out.println("入力値が不正です。");
+			System.out.println("1～10000で支払う金額を、0～1000で1円硬貨の枚数を入力してください。");
 			return;
 		}
 		setPayment(Integer.parseInt(inputTxt[0]));
 		setCoinCount(Integer.parseInt(inputTxt[1]));
+		setRightness(true);
 	}
 
 	/**
@@ -107,7 +126,7 @@ public class IntegrityConfiration {
 			return isInt;
 		}
 
-		if (AmountLength.Min.getLength() <= i && i <= AmountLength.Max.getLength()) {
+		if (AmountLength.Min.getLength() <= i && AmountLength.Max.getLength() >= i) {
 			isInt = true;
 		}
 		return isInt;
@@ -129,7 +148,7 @@ public class IntegrityConfiration {
 			return isInt;
 		}
 
-		if (CoinCountLength.Min.getCount() <= i && i <= CoinCountLength.Max.getCount()) {
+		if (CoinCountLength.Min.getCount() <= i && CoinCountLength.Max.getCount() >= i) {
 			isInt = true;
 		}
 		return isInt;

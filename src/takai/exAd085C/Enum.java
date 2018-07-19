@@ -1,5 +1,11 @@
 package takai.exAd085C;
 
+/**
+ * enumクラスを置いておくクラスです。
+ *
+ * @author 高井勇輝
+ *
+ */
 public class Enum {
 	public enum BillRate{
 		Thousand(1000),

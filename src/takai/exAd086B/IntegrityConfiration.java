@@ -1,6 +1,7 @@
 package takai.exAd086B;
 
 import takai.exAdInput.Input;
+
 /**
  * 入力値が適切かの判定を行うクラスです。
  *
@@ -8,7 +9,10 @@ import takai.exAdInput.Input;
  *
  */
 public class IntegrityConfiration {
-	int answer;
+	/** 二つの入力値を繋げた値 */
+	private int answer;
+	/** 入力値が適切かどうか */
+	private boolean canScan = false;
 
 	/**
 	 * @return answer
@@ -18,10 +22,24 @@ public class IntegrityConfiration {
 	}
 
 	/**
+	 * @return canScan
+	 */
+	public boolean isCanScan() {
+		return canScan;
+	}
+
+	/**
 	 * @param answer セットする answer
 	 */
 	public void setAnswer(int answer) {
 		this.answer = answer;
+	}
+
+	/**
+	 * @param canScan セットする canScan
+	 */
+	public void setCanScan(boolean canScan) {
+		this.canScan = canScan;
 	}
 
 	public enum IntLength {
@@ -48,20 +66,22 @@ public class IntegrityConfiration {
 
 		if (inputTxt.length != TEXT_LENGTH) {
 			System.out.println("入力文字列が不正です。");
+			System.out.println("2つの整数を入力してください。");
 			return;
 		}
 
 		if (!isIntNumber(inputTxt[0]) || !isIntNumber(inputTxt[1])) {
 			System.out.println("入力値が不正です。");
+			System.out.println("2つの整数を入力してください。");
 			return;
 		}
-
 		String number = inputTxt[0] + inputTxt[1];
 		setAnswer(Integer.parseInt(number));
+		setCanScan(true);
 	}
 
 	/**
-	 * 支払う金額の入力が数値かどうか、また、指定範囲内かどうかを判定します。
+	 * 入力されたものが数値かどうか、また、指定範囲内かどうかを判定します。
 	 *
 	 * @param amount 支払う金額
 	 * @return 判定結果

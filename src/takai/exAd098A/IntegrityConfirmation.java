@@ -1,7 +1,7 @@
 package takai.exAd098A;
 
-import takai.exAd098A.ExAd098A.IntLength;
 import takai.exAdInput.Input;
+
 /**
  * 入力値が指定されたものかどうか判定するクラスです。
  *
@@ -10,16 +10,31 @@ import takai.exAdInput.Input;
  */
 public class IntegrityConfirmation {
 	/** 一つ目の入力値 */
-	int inputNumber1 = 0;
+	private int inputNumber1 = 0;
 	/** 二つ目の入力値 */
-	int inputNumber2 = 0;
+	private int inputNumber2 = 0;
 	/** 和 */
-	int sum = 0;
+	private int sum = 0;
 	/** 差 */
-	int difference = 0;
+	private int difference = 0;
 	/** 積 */
-	int product = 0;
+	private int product = 0;
+	/** 会話できるかどうか */
+	private boolean isRightness = false;
 
+	public enum IntLength {
+		Min(-1000), Max(1000);
+
+		final int length;
+
+		public int getLength() {
+			return length;
+		}
+
+		private IntLength(int length) {
+			this.length = length;
+		}
+	}
 
 	/**
 	 * @return sum
@@ -40,6 +55,13 @@ public class IntegrityConfirmation {
 	 */
 	public int getProduct() {
 		return product;
+	}
+
+	/**
+	 * @return isRightness
+	 */
+	public boolean isRightness() {
+		return isRightness;
 	}
 
 	/**
@@ -64,7 +86,14 @@ public class IntegrityConfirmation {
 	}
 
 	/**
-	 * 入力値が適切かどうかを判定します
+	 * @param isRightness セットする isRightness
+	 */
+	public void setRightness(boolean isRightness) {
+		this.isRightness = isRightness;
+	}
+
+	/**
+	 * 入力値が適切かどうかを判定し、和、差、積を格納します
 	 */
 	public void scanString() {
 		Input input = new Input();
@@ -82,12 +111,12 @@ public class IntegrityConfirmation {
 			System.out.println("-1000～1000の整数を2つ、半角空白区切りで入力してください。");
 			return;
 		}
-
 		inputNumber1 = Integer.parseInt(inputTxt[0]);
 		inputNumber2 = Integer.parseInt(inputTxt[1]);
 		setSum(inputNumber1 + inputNumber2);
 		setDifference(inputNumber1 - inputNumber2);
 		setProduct(inputNumber1 * inputNumber2);
+		setRightness(true);
 	}
 
 	/**
@@ -100,6 +129,7 @@ public class IntegrityConfirmation {
 	private boolean isIntNumber(String inputTxt) {
 		boolean isInt = false;
 		int i = 0;
+
 		try {
 			i = Integer.parseInt(inputTxt);
 		} catch (NumberFormatException e) {
@@ -111,4 +141,6 @@ public class IntegrityConfirmation {
 		}
 		return isInt;
 	}
+
+
 }

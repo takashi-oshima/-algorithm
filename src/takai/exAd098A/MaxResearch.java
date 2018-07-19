@@ -7,7 +7,15 @@ package takai.exAd098A;
  *
  */
 public class MaxResearch {
-	public int maxNumber(int sum,int difference,int product) {
+	/**
+	 * 和、差、積のうちどれが最も大きいかを判定します。
+	 *
+	 * @param sum 和
+	 * @param difference 差
+	 * @param product 積
+	 * @return 最大値
+	 */
+	public int maxNumber(int sum, int difference, int product) {
 		final int ARRAY_LENGTH = 3;
 		int[] numbers = new int[ARRAY_LENGTH];
 
@@ -16,7 +24,7 @@ public class MaxResearch {
 		numbers[2] = product;
 
 		int max = numbers[0];
-		for(int i = 0; i < numbers.length ; i++) {
+		for (int i = 0; i < numbers.length; i++) {
 			max = Math.max(max, numbers[i]);
 		}
 		return max;

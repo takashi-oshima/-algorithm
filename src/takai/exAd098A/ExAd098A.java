@@ -8,28 +8,19 @@ package takai.exAd098A;
  */
 public class ExAd098A {
 
-	public enum IntLength {
-		Min(-1000), Max(1000);
-
-		final int length;
-
-		public int getLength() {
-			return length;
-		}
-
-		private IntLength(int length) {
-			this.length = length;
-		}
-	}
-
 	public static void main(String[] args) {
 		//入力値が適切かを判定し、計算結果を変数に格納します。
 		IntegrityConfirmation integrityConfirmation = new IntegrityConfirmation();
 		integrityConfirmation.scanString();
 
+		if(!integrityConfirmation.isRightness()) {
+			return;
+		}
+
 		//計算結果を比較し、最も大きい値を出力します。
 		MaxResearch maxResearch = new MaxResearch();
-		System.out.println(maxResearch.maxNumber(integrityConfirmation.getSum(), integrityConfirmation.getDifference(),
-				integrityConfirmation.getProduct()));
+		int result = maxResearch.maxNumber(integrityConfirmation.getSum(), integrityConfirmation.getDifference(),
+				integrityConfirmation.getProduct());
+		System.out.println(result);
 	}
 }

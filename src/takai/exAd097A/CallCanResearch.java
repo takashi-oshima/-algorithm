@@ -34,9 +34,10 @@ public class CallCanResearch {
 			a2c = -a2c;
 		}
 
+		int speakArea = inpuIntegrityConfirmationt.getSpeakArea();
+
 		//通話可能距離よりもAとCの距離が近いとき。
 		//または通話可能距離よりもAとBの距離が近く、かつ通話可能距離よりもBとCの距離が近ければフラグを立てます。
-		int speakArea = inpuIntegrityConfirmationt.getSpeakArea();
 		if (speakArea >= a2c || (speakArea >= a2b && speakArea >= b2c)) {
 			return "Yes";
 		}

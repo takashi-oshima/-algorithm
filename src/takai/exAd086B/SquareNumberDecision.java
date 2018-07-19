@@ -12,16 +12,12 @@ public class SquareNumberDecision {
 	 * @param answer 入力値を繋げた値
 	 */
 	public void isSquareNumber(int answer) {
-		int i = 1;
 		int squareNumber = 0;
 		boolean isSquareNumber = false;
 
-		while(answer > squareNumber) {
-			squareNumber = (int) Math.sqrt(i);
-			if(answer == squareNumber) {
-				isSquareNumber = true;
-			}
-			i++;
+		squareNumber = (int) Math.sqrt(answer);
+		if(squareNumber * squareNumber == answer) {
+			isSquareNumber = true;
 		}
 
 		if(isSquareNumber) {
