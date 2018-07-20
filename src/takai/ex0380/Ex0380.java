@@ -1,7 +1,7 @@
 package takai.ex0380;
 
 /**
- * オセロを行うクラスです
+ * マインスイーパーを行うクラスです
  *
  * @author 高井勇輝
  *
@@ -14,12 +14,12 @@ public class Ex0380 {
 		Board board = new Board();
 		board.setMine();
 
-		//オセロ盤が埋まるまでループ
+		//ゲームクリア、もしくはゲームオーバーまでループ
 		while (!(board.finishCheck(isGameFinish))) {
 			board.callBoard();
 			if(board.inputDiskPosition()) {
 				//2文字で駒を置く
-				board.putDisk();
+				board.putDisk(board.getRow(), board.getColumn());
 			}
 			if(board.checkMines()) {
 				board.callBoard();
