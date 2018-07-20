@@ -1,5 +1,6 @@
 package oshima.exAd096A;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 /**
@@ -14,11 +15,13 @@ public class Input {
 	private int inputDay = 0;
 
 	/**
-	 * DateRangeは、月、日の初期値と範囲の最小と最大とを表す列挙型です。
+	 * DateRangeは、年､月、日の初期値と範囲の最小と最大とを表す列挙型です。
 	 *
 	 * @author 大島
 	 */
 	public enum DateRange {
+		/** 年の初期値 */
+		StartYear(2018),
 		/** 月の初期値 */
 		StartMonth(1),
 		/** 月の最小範囲 */
@@ -67,6 +70,14 @@ public class Input {
 
 		if (inputMonth < DateRange.MinMonth.getRange() || inputMonth > DateRange.MaxMonth.getRange()
 				|| inputDay < DateRange.MinDay.getRange() || inputDay > DateRange.MaxDay.getRange()) {
+			return canInput;
+		}
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, DateRange.StartYear.getRange());
+		cal.set(Calendar.MONTH, inputMonth - 1);
+		int lastDay = cal.getActualMaximum(Calendar.DATE);
+		if (lastDay < inputDay) {
+			System.out.println(inputMonth + "月の末日は" + lastDay + "です");
 			return canInput;
 		}
 		canInput = true;
