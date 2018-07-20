@@ -14,8 +14,8 @@ import java.util.Scanner;
 public class Board {
 	/** 一つ目の入力値 */
 	String inputTxt = "";
-	/** 駒が置けるかを表すフラグ */
-	boolean canPutDisk = false;
+	/** マスが開けられるかを表すフラグ */
+	boolean isCellOpen = false;
 	/** マスが開いているかの判定 */
 	boolean isOpen[][] = new boolean[10][10];
 	/** 地雷が埋まっているかの判定 */
@@ -67,7 +67,7 @@ public class Board {
 		this.column = column;
 	}
 
-	public enum DiskColor {
+	public enum CellType {
 		Mine(-1), Unkown(0), Blank(10);
 
 		final int state;
@@ -76,7 +76,7 @@ public class Board {
 			return state;
 		}
 
-		private DiskColor(int state) {
+		private CellType(int state) {
 			this.state = state;
 		}
 	}
@@ -135,8 +135,8 @@ public class Board {
 			int thisRow = setRow.get(i);
 			int thisColumn = setColumn.get(i);
 			//地雷がセットされていなければセットする
-			if (board[thisRow][thisColumn] != DiskColor.Mine.getState()) {
-				board[thisRow][thisColumn] = DiskColor.Mine.getState();
+			if (board[thisRow][thisColumn] != CellType.Mine.getState()) {
+				board[thisRow][thisColumn] = CellType.Mine.getState();
 				isMines[thisRow][thisColumn] = true;
 				minesCount(thisRow, thisColumn);
 				i++;
@@ -154,7 +154,7 @@ public class Board {
 		for (int referenceRow = thisRow - 1; referenceRow <= thisRow + 1; referenceRow++) {
 			for (int referenceColumn = thisColumn - 1; referenceColumn <= thisColumn + 1; referenceColumn++) {
 				if (isInBoard(referenceRow, referenceColumn)
-						&& board[referenceRow][referenceColumn] != DiskColor.Mine.getState()) {
+						&& board[referenceRow][referenceColumn] != CellType.Mine.getState()) {
 					nearMines[referenceRow][referenceColumn] += 1;
 				}
 			}
@@ -225,7 +225,7 @@ public class Board {
 			return;
 		}
 
-		if (!isMines[row][column] && DiskColor.Mine.getState() != board[row][column]) {
+		if (!isMines[row][column] && CellType.Mine.getState() != board[row][column]) {
 			if (BoardRange.Start.getRange() <= row && row <= board.length
 					&& BoardRange.Start.getRange() <= column
 					&& column <= board.length) {
@@ -238,7 +238,7 @@ public class Board {
 	}
 
 	/**
-	 * 入力された文字列を分割し、駒の配置として保存して、文字配列を返します。
+	 * 入力された文字列を分割し、開けるマスの位置として保存して、文字配列を返します。
 	 *
 	 * @return inputNumber 分割済みの入力された文字列
 	 */
@@ -254,12 +254,12 @@ public class Board {
 
 		if (inputNumber.length != 2) {
 			System.out.println("入力された文字列が不正です。(行,列)の形で半角整数を2つ入力してください。");
-			return canPutDisk;
+			return isCellOpen;
 		}
 
 		if (!isIntNumber(inputNumber[0]) || !isIntNumber(inputNumber[1])) {
 			System.out.println("不適な文字列です。,(カンマ)区切りで半角整数を2つ入力してください。");
-			return canPutDisk;
+			return isCellOpen;
 		}
 
 		int row = Integer.parseInt(inputNumber[0]);
@@ -268,12 +268,12 @@ public class Board {
 		if (BoardRange.Start.getRange() > row || row > board.length || BoardRange.Start.getRange() > column
 				|| column > board.length) {
 			System.out.println("不適切な数値です。1～8の値を入力してください。");
-			return canPutDisk;
+			return isCellOpen;
 		}
 		setRow(row);
 		setColumn(column);
-		canPutDisk = true;
-		return canPutDisk;
+		isCellOpen = true;
+		return isCellOpen;
 	}
 
 	/**
