@@ -76,6 +76,7 @@ public class Input {
 		cal.set(Calendar.YEAR, DateRange.StartYear.getRange());
 		cal.set(Calendar.MONTH, inputMonth - 1);
 		int lastDay = cal.getActualMaximum(Calendar.DATE);
+		
 		if (lastDay < inputDay) {
 			System.out.println(inputMonth + "月の末日は" + lastDay + "です");
 			return canInput;
