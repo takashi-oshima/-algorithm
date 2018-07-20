@@ -28,5 +28,6 @@ public class Ex0380 {
 			}
 		}
 		board.callBoard();
+		System.out.println("ゲームクリアです。");
 	}
 }

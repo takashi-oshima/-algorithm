@@ -307,12 +307,13 @@ public class Board {
 		int count = 0;
 		for (int i = 1; i < board.length; i++) {
 			for (int j = 1; j < board[i].length; j++) {
-				if (!isOpen[i][j] && isMines[i][j]) {
+				if(isOpen[i][j] && !isMines[i][j]){
 					count++;
 				}
 			}
 		}
-		if(count == 10) {
+
+		if(count == 71) {
 			isGameFinish = true;
 		}
 		return isGameFinish;
