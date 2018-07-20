@@ -16,8 +16,11 @@ public class Board {
 	String inputTxt = "";
 	/** 駒が置けるかを表すフラグ */
 	boolean canPutDisk = false;
+	/** マスが開いているかの判定 */
 	boolean isOpen[][] = new boolean[10][10];
+	/** 地雷が埋まっているかの判定 */
 	boolean isMines[][] = new boolean[10][10];
+	/** 周囲８マスに何個地雷があるか */
 	int nearMines[][] = new int[10][10];
 	/** 行 */
 	int row = 0;
@@ -92,7 +95,9 @@ public class Board {
 		}
 	}
 
-	//10個の地雷をセットする
+	/**
+	 * 10個の地雷をランダムに生成し、配列に配置します。
+	 */
 	public void setMine() {
 		List<Integer> setRow = new ArrayList<>();
 		List<Integer> setColumn = new ArrayList<>();
@@ -133,14 +138,19 @@ public class Board {
 			if (board[thisRow][thisColumn] != DiskColor.Mine.getState()) {
 				board[thisRow][thisColumn] = DiskColor.Mine.getState();
 				isMines[thisRow][thisColumn] = true;
-				minesCount(i, thisRow, thisColumn);
+				minesCount(thisRow, thisColumn);
 				i++;
 			}
 		}
 	}
 
-	//地雷セット後の周囲のマスの要素を1増やす
-	public void minesCount(int number, int thisRow, int thisColumn) {
+	/**
+	 * 地雷を置いた後に、周囲のマスのカウントを1増やします
+	 *
+	 * @param thisRow 地雷を置いたマスの行
+	 * @param thisColumn 地雷を置いたマスの列
+	 */
+	public void minesCount(int thisRow, int thisColumn) {
 		for (int referenceRow = thisRow - 1; referenceRow <= thisRow + 1; referenceRow++) {
 			for (int referenceColumn = thisColumn - 1; referenceColumn <= thisColumn + 1; referenceColumn++) {
 				if (isInBoard(referenceRow, referenceColumn)
@@ -151,7 +161,13 @@ public class Board {
 		}
 	}
 
-	//周囲のマスが盤上かの確認
+	/**
+	 * 周囲のマスが盤上かどうかを判定します
+	 *
+	 * @param referenceRow 参照している行
+	 * @param referenceColumn 参照している列
+	 * @return 判定結果
+	 */
 	public boolean isInBoard(int referenceRow, int referenceColumn) {
 		//確認箇所が盤上かの判定
 		boolean isInBoard = false;
@@ -163,7 +179,7 @@ public class Board {
 	}
 
 	/**
-	 * 現在のオセロ盤の状況を表示します。
+	 * 現在の盤上の状況を表示します。
 	 */
 	public void callBoard() {
 		System.out.println("  1 2 3 4 5 6 7 8 9");
@@ -187,12 +203,12 @@ public class Board {
 		}
 	}
 
-	//引数を持たせる
-	public void putDisk() {
-		putDisk(row, column);
-	}
-
-	//空マスにする判定とその処理を行う
+	/**
+	 * マスを開ける判定と、その処理を行います。
+	 *
+	 * @param row 入力行
+	 * @param column 入力列
+	 */
 	public void putDisk(int row, int column) {
 
 		if (BoardRange.Start.getRange() > row || row >= board.length || BoardRange.Start.getRange() > column
@@ -203,13 +219,12 @@ public class Board {
 		if (isOpen[row][column]) {
 			return;
 		}
-
 		isOpen[row][column] = true;
+
 		if (0 < nearMines[row][column]) {
 			return;
 		}
-		//現在：周囲8マス
-		//変更：上下左右だけ見るように
+
 		if (!isMines[row][column] && DiskColor.Mine.getState() != board[row][column]) {
 			if (BoardRange.Start.getRange() <= row && row <= board.length
 					&& BoardRange.Start.getRange() <= column
