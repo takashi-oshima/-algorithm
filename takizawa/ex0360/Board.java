@@ -23,11 +23,11 @@ public class Board {
 	};
 
 	// 初期マスと置いてある駒数の表示
-	public void board() {
+	public void outputBoard() {
 		System.out.println("  1 2 3 4 5 6 7 8");
 		for (int i = 1; i < board.length; i++) {
 			System.out.print(i);
-			for (int j = 0; j <= 8; j++) {
+			for (int j = 0; j < board.length; j++) {
 
 				if (board[i][j] == 0) {
 					System.out.print("□");
@@ -53,7 +53,7 @@ public class Board {
 	public int blackDiskCount() {
 		int blackDiskCount = 0;
 		for (int i = 1; i < board.length; i++) {
-			for (int j = 0; j <= 8; j++) {
+			for (int j = 0; j < board.length; j++) {
 
 				if (board[i][j] == 1) {
 					blackDiskCount++;
@@ -71,7 +71,7 @@ public class Board {
 	public int whiteDiskCount() {
 		int whiteDiskCount = 0;
 		for (int i = 1; i < board.length; i++) {
-			for (int j = 0; j <= 8; j++) {
+			for (int j = 0; j < board.length; j++) {
 
 				if (board[i][j] == 2) {
 					whiteDiskCount++;
@@ -206,14 +206,19 @@ public class Board {
 		if (board[currentLow][currentColumn] == diskColor) {
 			return false;
 		}
+
 		//周囲8マスを1マスずつ調べていったときに空だった場合
 		if (board[currentLow][currentColumn] == 0) {
 			return false;
 		}
+
+		// どの方向を見に行くかの取得
 		int newCurrentLow = currentLow - low;
 		int newCurrentColumn = currentColumn - column;
-		currentLow = newCurrentLow + low; // 現在どの行を見に行っているのかを取得
-		currentColumn = newCurrentColumn + column; //現在どの列を見に行っているのかを取得
+
+		// 次にどの行と列を見るのかを取得
+		currentLow = newCurrentLow + low;
+		currentColumn = newCurrentColumn + column;
 
 		// 確認している場所がボードの範囲内だった場合はループさせる
 		while (currentLow < board.length && currentLow >= 1
@@ -249,7 +254,7 @@ public class Board {
 	 *
 	 * @return isGameSet ゲーム終了か
 	 */
-	public boolean GameSet() {
+	public boolean gameSet() {
 		boolean isGameSet = false;
 		final int MAX_CELL = 64;
 		int blackDisk = blackDiskCount();

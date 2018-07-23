@@ -14,8 +14,8 @@ public class Ex0360 {
 		Disk disk = new Disk();
 
 		//GameSetメソッドが呼び出されるまで続けます
-		while (!(board.GameSet())) {
-			board.board();
+		while (!(board.gameSet())) {
+			board.outputBoard();
 			disk.colorName();
 			String[] putDiskStr = board.vaildNumber();
 			switch (putDiskStr.length) {
@@ -38,6 +38,6 @@ public class Ex0360 {
 			}
 		}
 		// ゲームが終わった際のボードの状態を読み込みます
-		board.board();
+		board.outputBoard();
 	}
 }
