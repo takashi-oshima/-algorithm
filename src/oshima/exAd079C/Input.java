@@ -1,6 +1,5 @@
 package oshima.exAd079C;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
