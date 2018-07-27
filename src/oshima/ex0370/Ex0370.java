@@ -16,7 +16,7 @@ public class Ex0370 {
 	public static void main(String[] args) {
 		String answer = "";
 
-		// コマンドライン引数に設定されている値を確認します。
+		// 答えに正確な入力がされているかを確認します。
 		if (args.length > 0 && args[0].matches("[0-9]{4}")) {
 			answer = args[0];
 		} else {
