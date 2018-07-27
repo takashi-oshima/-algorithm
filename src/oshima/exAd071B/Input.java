@@ -17,7 +17,7 @@ public class Input {
 	 * @author 大島
 	 */
 	public enum StringRange {
-		SLengthMin(1), SLengthMax(10000);
+		SLengthMin(1), SLengthMax(100000);
 
 		final int range;
 
