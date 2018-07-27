@@ -2,9 +2,10 @@ package takai.exAd071B;
 
 import takai.exAdInput.Input;
 /**
+ * 入力値から、探索する文字列を生成し、
+ * 生成された者が適切な文字列化を判定します。
  *
- *
- * @author CAICA
+ * @author 高井勇輝
  *
  */
 public class IntegrityConfirmation {
@@ -59,6 +60,12 @@ public class IntegrityConfirmation {
 		return;
 	}
 
+	/**
+	 * 生成された文字列が適切なものかを判定します。
+	 *
+	 * @param inputTxt 生成された入力文字列
+	 * @return 判定結果
+	 */
 	private boolean isTxt(String inputTxt) {
 
 		if(inputTxt.length() < TxtLength.Min.getLength() || inputTxt.length() > TxtLength.Max.getLength()) {
