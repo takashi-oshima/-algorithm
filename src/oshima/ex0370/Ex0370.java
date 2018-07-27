@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Ex0370 {
 
-	// ギブアップするときの入力値です。
+	/** ギブアップするときの入力値です。 */
 	public static final String GIVEUP = "999";
 
 	public static void main(String[] args) {
