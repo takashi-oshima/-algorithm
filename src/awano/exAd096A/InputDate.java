@@ -20,7 +20,7 @@ public class InputDate {
 	 * @return 正しい日付かどうか
 	 */
 	public boolean checkDate() {
-		boolean corecctDate = false;
+		boolean correctDate = false;
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.println(">a  b");
@@ -29,7 +29,7 @@ public class InputDate {
 
 		if (date.length != 2) {
 			System.out.println("月日を入力し直してください。");
-			return corecctDate;
+			return correctDate;
 		}
 
 		try {
@@ -37,22 +37,22 @@ public class InputDate {
 			day = Integer.parseInt(date[1]);
 		} catch (NumberFormatException e) {
 			System.out.println("入力された数値に文字列が含まれています。");
-			return corecctDate;
+			return correctDate;
 		}
 
 		if ((month > 12 || month < 1) && (day < 1 || day > 31)) {
 			System.out.println("月日が範囲外です。");
-			return corecctDate;
+			return correctDate;
 		}
 
 		if (month > 12 || month < 1) {
 			System.out.println("月が範囲外です。");
-			return corecctDate;
+			return correctDate;
 		}
 
 		if (day < 1 || day > 31) {
 			System.out.println("日が範囲外です。");
-			return corecctDate;
+			return correctDate;
 		}
 
 		//2018年グレゴリオ暦における全月の末日を配列に格納します
@@ -61,10 +61,10 @@ public class InputDate {
 		//入力された日が正しい末日を超える場合
 		if (day > endDate[month - 1]) {
 			System.out.println(month + "月の末日を超えています。");
-			return corecctDate;
+			return correctDate;
 		}
-		corecctDate = true;
-		return corecctDate;
+		correctDate = true;
+		return correctDate;
 	}
 
 	/**
