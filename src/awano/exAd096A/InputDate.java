@@ -97,7 +97,7 @@ public class InputDate {
 	/**
 	 * 日を設定します
 	 *
-	 * @param dayn 日
+	 * @param day 日
 	 */
 	public void setDay(int day) {
 		this.day = day;
