@@ -23,7 +23,7 @@ public class Ex0370 {
 		String inputNumber = "";
 
 		// 起動時引数の確認
-		if (args.equals(null) || args.length != 4) {
+		if (args.equals(null) || args[0].length() != 4) {
 			System.out.println("エラー：コマンドライン引数に半角数字4桁を設定してください。");
 			return;
 		}
