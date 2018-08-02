@@ -15,6 +15,8 @@ public class ExAd096A {
 		InputDate inputDate = new InputDate();
 		CountTakahashi countTakahashi = new CountTakahashi();
 
+		System.out.println("高橋がいくつあるか数えます。実行例(5 5)");
+		System.out.println("月と日に応じた半角数字を半角スペース1つで区切って入力してください");
 		// 入力形式に問題がなければ、「高橋」がいくつあるかカウントして表示します
 		if (inputDate.checkDate()) {
 			countTakahashi.showTakahshi(inputDate);
