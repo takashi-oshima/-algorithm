@@ -32,7 +32,7 @@ public class InputDate {
 		String[] inputDate = inputNumber.split(" ");
 
 		if (inputDate.length != 2) {
-			System.out.println("入力形式が違います。");
+			System.out.println("入力形式が違います。実行例（5 5）");
 			return checkDate();
 		}
 
@@ -40,22 +40,22 @@ public class InputDate {
 			this.month = Integer.parseInt(inputDate[0]);
 			this.day = Integer.parseInt(inputDate[1]);
 		} catch (NumberFormatException e) {
-			System.out.println("数字以外を入力しないでください。");
+			System.out.println("数字以外を入力しないでください。実行例（5 5）");
 			return checkDate();
 		}
 
 		if (this.month < 1 || this.month > 12 && this.day < 1 || this.day > 31) {
-			System.out.println("月日が範囲外です。");
+			System.out.println("月日が範囲外です。実行例（5 5）");
 			return checkDate();
 		}
 
 		if (this.month < 1 || this.month > 12) {
-			System.out.println("月が範囲外になっています。");
+			System.out.println("月が範囲外になっています。実行例（5 5）");
 			return checkDate();
 		}
 
 		if (this.day < 1 || this.day > 31) {
-			System.out.println("日が範囲外になっています。");
+			System.out.println("日が範囲外になっています。実行例（5 5）");
 			return checkDate();
 		}
 
@@ -64,7 +64,7 @@ public class InputDate {
 
 		//入力された日が入力した月の末日を超える場合
 		if (this.day > endDateOfMonth[this.month - 1]) {
-			System.out.println(month + "月の末日を超えています。");
+			System.out.println(month + "月の末日を超えています。実行例（5 5）の形式で再入力してください");
 			return checkDate();
 		}
 		return true;
