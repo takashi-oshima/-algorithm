@@ -12,7 +12,7 @@ public class ExAd090B {
 		Palindrome parindlome = new Palindrome();
 		// 入力内容が正しいか判定します
 		if (inputNumber.isValidInput()) {
-			// 回分数を数えます
+			// 回文数を数えます
 			parindlome.countPalindrome(inputNumber) ;
 		}
 	}
