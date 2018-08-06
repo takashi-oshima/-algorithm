@@ -26,15 +26,15 @@ public class InputNumber {
 		System.out.println(">");
 
 		String inputNumber = scan.nextLine();
-		String[] inputDate = inputNumber.split(" ");
+		String[] inputNum = inputNumber.split(" ");
 
-		if (inputDate.length != 1) {
+		if (inputNum.length != 1) {
 			System.out.println("入力値は1つです。再入力してください。");
 			return isValidInput();
 		}
 
 		try {
-			this.numberN = Integer.parseInt(inputDate[0]);
+			this.numberN = Integer.parseInt(inputNum[0]);
 
 		} catch (NumberFormatException e) {
 			System.out.println("数字以外を入力しないでください。");
