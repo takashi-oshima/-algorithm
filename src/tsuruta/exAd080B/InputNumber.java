@@ -1,4 +1,4 @@
-package exAd080B;
+﻿package exAd080B;
 
 import java.util.Scanner;
 
@@ -42,7 +42,7 @@ public class InputNumber {
 			return isValidInput();
 		}
 
-		// 入力値N 1～10000000以外の整数を受け付けないようにします
+		// 入力値N 1～100000000以外の整数を受け付けないようにします
 		if (this.numberN < 1 || this.numberN > 100000000) {
 			System.out.println("1から10000000の半角数字を入力してください");
 			return isValidInput();
