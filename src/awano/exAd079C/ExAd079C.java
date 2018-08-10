@@ -14,7 +14,7 @@ public class ExAd079C {
 		//入力値が正しい場合
 		if (inputNumber.checknumber()) {
 			//答えが7となる式を出力します。
-			formula.createFormula(inputNumber);
+			System.out.println(formula.createFormula(inputNumber));
 		}
 	}
 }
