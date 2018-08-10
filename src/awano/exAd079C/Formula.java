@@ -34,47 +34,47 @@ public class Formula {
 		//入力値D
 		int op4 = inputNumber.getReferenceNumber()[3];
 
-		//A+B+C+Dの場合1を返します。
+		//A+B+C+Dの場合
 		if (op1 + op2 + op3 + op4 == SEVEN) {
 			return op1 + PLUS + op2 + PLUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A+B-C+Dの場合2を返します。
+		//A+B-C+Dの場合
 		if (op1 + op2 - op3 + op4 == SEVEN) {
 			return op1 + PLUS + op2 + MINUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A+B-C-Dの場合3を返します。
+		//A+B-C-Dの場合
 		if (op1 + op2 - op3 - op4 == SEVEN) {
 			return op1 + PLUS + op2 + MINUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A+B+C-Dの場合4を返します。
+		//A+B+C-Dの場合
 		if (op1 + op2 + op3 - op4 == SEVEN) {
 			return op1 + PLUS + op2 + PLUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B-C-Dの場合5を返します。
+		//A-B-C-Dの場合5
 		if (op1 - op2 - op3 - op4 == SEVEN) {
 			return op1 + MINUS + op2 + MINUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B+C-Dの場合6を返します。
+		//A-B+C-Dの場合
 		if (op1 - op2 + op3 - op4 == SEVEN) {
 			return op1 + MINUS + op2 + PLUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B+C+Dの場合7を返します。
+		//A-B+C+Dの場合
 		if (op1 - op2 + op3 + op4 == SEVEN) {
 			return op1 + MINUS + op2 + PLUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B-C+Dの場合8を返します。
+		//A-B-C+Dの場合
 		if (op1 - op2 - op3 + op4 == SEVEN) {
 			return op1 + MINUS + op2 + MINUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//答えが存在しない場合9を返します。
+		//答えが存在しない場合
 		return "Eroor";
 	}
 }
