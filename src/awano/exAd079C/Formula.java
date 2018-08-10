@@ -24,8 +24,7 @@ public class Formula {
 	 * @param inputNumber InputNumberクラス
 	 * @return 式番号
 	 */
-	public int createFormula(InputNumber inputNumber) {
-		int typeFormula = 0;
+	public String createFormula(InputNumber inputNumber) {
 		//入力値A
 		int op1 = inputNumber.getReferenceNumber()[0];
 		//入力値B
@@ -35,102 +34,47 @@ public class Formula {
 		//入力値D
 		int op4 = inputNumber.getReferenceNumber()[3];
 
-		//A+B+C+Dの場合1を返します。
+		//A+B+C+Dの場合
 		if (op1 + op2 + op3 + op4 == SEVEN) {
-			System.out.println(op1 + PLUS + op2 + PLUS + op3 + PLUS + op4 + EQUAL + SEVEN);
-			typeFormula = 1;
-			return typeFormula;
+			return op1 + PLUS + op2 + PLUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A+B-C+Dの場合2を返します。
+		//A+B-C+Dの場合
 		if (op1 + op2 - op3 + op4 == SEVEN) {
-			System.out.println(op1 + PLUS + op2 + MINUS + op3 + PLUS + op4 + EQUAL + SEVEN);
-			typeFormula = 2;
-			return typeFormula;
+			return op1 + PLUS + op2 + MINUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A+B-C-Dの場合3を返します。
+		//A+B-C-Dの場合
 		if (op1 + op2 - op3 - op4 == SEVEN) {
-			System.out.println(op1 + PLUS + op2 + MINUS + op3 + MINUS + op4 + EQUAL + SEVEN);
-			typeFormula = 3;
-			return typeFormula;
+			return op1 + PLUS + op2 + MINUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A+B+C-Dの場合4を返します。
+		//A+B+C-Dの場合
 		if (op1 + op2 + op3 - op4 == SEVEN) {
-			System.out.println(op1 + PLUS + op2 + PLUS + op3 + MINUS + op4 + EQUAL + SEVEN);
-			typeFormula = 4;
-			return typeFormula;
+			return op1 + PLUS + op2 + PLUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B-C-Dの場合5を返します。
+		//A-B-C-Dの場合5
 		if (op1 - op2 - op3 - op4 == SEVEN) {
-			System.out.println(op1 + MINUS + op2 + MINUS + op3 + MINUS + op4 + EQUAL + SEVEN);
-			typeFormula = 5;
-			return typeFormula;
+			return op1 + MINUS + op2 + MINUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B+C-Dの場合6を返します。
+		//A-B+C-Dの場合
 		if (op1 - op2 + op3 - op4 == SEVEN) {
-			System.out.println(op1 + MINUS + op2 + PLUS + op3 + MINUS + op4 + EQUAL + SEVEN);
-			typeFormula = 6;
-			return typeFormula;
+			return op1 + MINUS + op2 + PLUS + op3 + MINUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B+C+Dの場合7を返します。
+		//A-B+C+Dの場合
 		if (op1 - op2 + op3 + op4 == SEVEN) {
-			System.out.println(op1 + MINUS + op2 + PLUS + op3 + PLUS + op4 + EQUAL + SEVEN);
-			typeFormula = 7;
-			return typeFormula;
+			return op1 + MINUS + op2 + PLUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//A-B-C+Dの場合8を返します。
+		//A-B-C+Dの場合
 		if (op1 - op2 - op3 + op4 == SEVEN) {
-			System.out.println(op1 + MINUS + op2 + MINUS + op3 + PLUS + op4 + EQUAL + SEVEN);
-			typeFormula = 8;
-			return typeFormula;
+			return op1 + MINUS + op2 + MINUS + op3 + PLUS + op4 + EQUAL + SEVEN;
 		}
 
-		//答えが存在しない場合9を返します。
-		System.out.println("Eroor");
-		typeFormula = 9;
-		return typeFormula;
-	}
-
-	/**
-	 * createFormulaメソッドで返された式番号を元にswitch文をつくります。
-	 *
-	 * @param inputNumber InputNumberクラス
-	 */
-	public void selectFromula(InputNumber inputNumber) {
-		switch (createFormula(inputNumber)) {
-		case 1: {
-			break;
-		}
-		case 2: {
-			break;
-		}
-		case 3: {
-			break;
-		}
-		case 4: {
-			break;
-		}
-		case 5: {
-			break;
-		}
-		case 6: {
-			break;
-		}
-		case 7: {
-			break;
-		}
-		case 8: {
-			break;
-		}
-		case 9: {
-			break;
-		}
-		}
+		//答えが存在しない場合
+		return "Eroor";
 	}
 }
